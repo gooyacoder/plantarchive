@@ -12,4 +12,5 @@ import kotlinx.serialization.modules.*
 
 
 @Serializable
-data class Plant(val plant_name: String, val image: ByteArray, val startDate: String)
+data class Plant(val plant_name: String, val image: ByteArray, val startDate: String,
+                 val description: String)

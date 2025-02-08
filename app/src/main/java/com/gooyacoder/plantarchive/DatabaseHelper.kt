@@ -14,7 +14,6 @@ class DatabaseHelper(context: Context?) :
 
     var plants = mutableListOf<Plant>()
 
-
     override fun onCreate(db: SQLiteDatabase) {
 
         // creating table
@@ -46,8 +45,6 @@ class DatabaseHelper(context: Context?) :
         private const val KEY_PLANT_DESCRIPTION =  "plant_description"
 
 
-
-
         // Table create statement
         private const val CREATE_TABLE_PLANT = "CREATE TABLE " + DB_TABLE + "(" +
                 KEY_NAME + " TEXT NOT NULL UNIQUE," +
@@ -64,6 +61,7 @@ class DatabaseHelper(context: Context?) :
             val cv = ContentValues()
             cv.put(KEY_NAME, plant.plant_name)
             cv.put(KEY_IMAGE, plant.image)
+            cv.put(KEY_PLANT_DESCRIPTION, plant.description)
             cv.put(KEY_PLANT_START_DATE, plant.startDate)
             database.insert(DB_TABLE, null, cv)
         }
@@ -71,11 +69,12 @@ class DatabaseHelper(context: Context?) :
     }
 
     @Throws(SQLiteException::class)
-    fun addEntry(name: String, image: ByteArray, startDate: String): Long {
+    fun addEntry(name: String, image: ByteArray,description: String ,startDate: String): Long {
         val database = this.writableDatabase
         val cv = ContentValues()
         cv.put(KEY_NAME, name)
         cv.put(KEY_IMAGE, image)
+        cv.put(KEY_PLANT_DESCRIPTION, description)
         cv.put(KEY_PLANT_START_DATE, startDate)
         val result = database.insert(
             DB_TABLE,
@@ -86,8 +85,6 @@ class DatabaseHelper(context: Context?) :
         return result
     }
 
-
-
     fun getPlant(name: String?): Plant {
         val db = this.writableDatabase
         val query = "SELECT * FROM $DB_TABLE where $KEY_NAME = '$name';"
@@ -95,15 +92,13 @@ class DatabaseHelper(context: Context?) :
         cursor.moveToNext()
         val name = cursor.getString(0)
         val imagebyte = cursor.getBlob(1)
-        val start_date = cursor.getString(2)
-
-
-        val g_date = GerminationDate()
-
+        val description = cursor.getString(2)
+        val start_date = cursor.getString(3)
 
         val plant = Plant(
             name,
             imagebyte,
+            description,
             start_date
 
         )
@@ -120,14 +115,13 @@ class DatabaseHelper(context: Context?) :
         while (cursor.moveToNext()) {
             val name = cursor.getString(0)
             val imagebyte = cursor.getBlob(1)
-            val start_date = cursor.getString(2)
-
-
-            val g_date = GerminationDate()
+            val description = cursor.getString(2)
+            val start_date = cursor.getString(3)
 
             val plant = Plant(
                 name,
                 imagebyte,
+                description,
                 start_date
             )
             plants.add(plant)
@@ -157,16 +151,15 @@ class DatabaseHelper(context: Context?) :
         return result
     }
 
-
     fun updatePlant(plant: Plant) {
         val db = this.writableDatabase
         val cv = ContentValues()
         cv.put(KEY_NAME, plant.plant_name)
         cv.put(KEY_IMAGE, plant.image)
+        cv.put(KEY_PLANT_DESCRIPTION, plant.description)
         cv.put(KEY_PLANT_START_DATE, plant.startDate)
         db.insert(DB_TABLE, null, cv)
         db.close()
     }
-
 
 }
