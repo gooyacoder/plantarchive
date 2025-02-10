@@ -43,6 +43,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/plantsView"
         android:layout_width="411dp"
         android:layout_height="659dp"
         app:layout_constraintBottom_toBottomOf="parent"
