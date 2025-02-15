@@ -48,11 +48,13 @@
         app:layout_constraintTop_toBottomOf="@+id/plantNameSpinner"
         app:srcCompat="@drawable/ic_launcher_background" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/addPlantDetailsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:backgroundTint="#70bb70"
+        app:cornerRadius="4dp"
         android:text="افزودن"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

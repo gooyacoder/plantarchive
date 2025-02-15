@@ -1,16 +1,20 @@
 package com.gooyacoder.plantarchive
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 
 class ItemAdapter(private val itemList: List<Item>,
                   private val itemClickListener: OnItemClickListener,
-                  private val listener: OnItemLongClickListener) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+                  private val listener: OnItemLongClickListener)
+    : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(item: Item)
@@ -57,4 +61,5 @@ class ItemAdapter(private val itemList: List<Item>,
     }
 
     override fun getItemCount() = itemList.size
+
 }

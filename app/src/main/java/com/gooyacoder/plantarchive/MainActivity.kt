@@ -1,8 +1,10 @@
 package com.gooyacoder.plantarchive
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -54,7 +56,23 @@ class MainActivity : AppCompatActivity() ,ItemAdapter.OnItemClickListener, ItemA
     }
     override fun onItemClick(item: Item) {
     // Show plant details
+        val builder = AlertDialog.Builder(this)
+        val plant_name = item.title
+        builder.setMessage("Choose an option")
+            .setCancelable(false)
+            .setPositiveButton("Show Details") { dialog, id ->
+                // show PlantDetailsActivity
+                dialog.dismiss()
 
+            }
+            .setNegativeButton("Add Details") { dialog, id ->
+                // show AddDetailsActivity
+                val intent = Intent(applicationContext, AddDetailsActivity::class.java)
+                startActivity(intent)
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 
     override fun onItemLongClick(item: Item) {
@@ -77,4 +95,6 @@ class MainActivity : AppCompatActivity() ,ItemAdapter.OnItemClickListener, ItemA
         val alert = builder.create()
         alert.show()
     }
+
+
 }
