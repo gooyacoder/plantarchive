@@ -1,5 +1,6 @@
 package com.gooyacoder.plantarchive
 
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,6 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import java.io.FileNotFoundException
+import java.util.Date
+
 
 class AddDetailsActivity : AppCompatActivity() {
     lateinit var plant: Plant
@@ -47,6 +50,24 @@ class AddDetailsActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             startActivityForResult(intent, 2)
         })
+
+        val saveToDatabase: MaterialButton = findViewById(R.id.addPlantDetailsButton)
+        saveToDatabase.setOnClickListener {
+            val dbHelper = MyDatabaseHelper(applicationContext)
+            val data = dbHelper.writableDatabase
+            val contentValues = ContentValues().apply {
+                put("plant_name", plantName)
+                put("image", DbBitmapUtility.getBytes(imageBitmap))
+                val date = GerminationDate()
+                val today = Date()
+                put("image_date", date.dateToString(today))
+            }
+            data.insert("PlantsGallery", null, contentValues)
+            data.close()
+            Toast.makeText(applicationContext, "Saved to PlantsGallery Table",
+                Toast.LENGTH_SHORT).show()
+            finish()
+        }
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
