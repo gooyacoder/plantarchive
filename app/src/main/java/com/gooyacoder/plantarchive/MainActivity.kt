@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() ,ItemAdapter.OnItemClickListener, ItemA
             .setNegativeButton("Add Details") { dialog, id ->
                 // show AddDetailsActivity
                 val intent = Intent(applicationContext, AddDetailsActivity::class.java)
+                intent.putExtra("plant_name", item.title)
                 startActivity(intent)
                 dialog.dismiss()
             }

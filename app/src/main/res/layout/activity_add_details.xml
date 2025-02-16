@@ -7,12 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".AddDetailsActivity">
 
-    <Spinner
-        android:id="@+id/plantNameSpinner"
+    <TextView
+        android:id="@+id/plantNameTextView"
         android:layout_width="189dp"
         android:layout_height="42dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
+        android:textSize="24sp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +47,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantNameSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/plantNameTextView"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <com.google.android.material.button.MaterialButton
@@ -59,4 +61,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantImageView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#f0ee70"
+        app:cornerRadius="4dp"
+        android:text="عکس جدید"
+        android:textColor="#44aa44"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
