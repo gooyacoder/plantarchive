@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -46,48 +48,15 @@ class PlantDetailsActivity : AppCompatActivity(), DetailsItemAdapter.OnItemClick
     }
 
     override fun onItemClick(item: DetailsItem) {
-        // Show plant details
-//        val builder = AlertDialog.Builder(this)
-//        builder.setMessage("Choose an option")
-//            .setCancelable(false)
-//            .setPositiveButton("Show Details") { dialog, id ->
-//                // show PlantDetailsActivity
-//                val intent = Intent(applicationContext, PlantDetailsActivity::class.java)
-//                intent.putExtra("plant_name", item.title)
-//                startActivity(intent)
-//                dialog.dismiss()
-//
-//            }
-//            .setNegativeButton("Add Details") { dialog, id ->
-//                // show AddDetailsActivity
-//                val intent = Intent(applicationContext, AddDetailsActivity::class.java)
-//                intent.putExtra("plant_name", item.title)
-//                startActivity(intent)
-//                dialog.dismiss()
-//            }
-//        val alert = builder.create()
-//        alert.show()
+        val big_image: ImageView = findViewById(R.id.bigImage)
+        big_image.setOnClickListener{
+            if(big_image.visibility == View.VISIBLE)
+                big_image.visibility = View.INVISIBLE
+        }
+        big_image.setImageBitmap(DbBitmapUtility.getImage(item.image))
+        big_image.visibility = View.VISIBLE
     }
 
-    override fun onItemLongClick(item: DetailsItem) {
-//        // Handle the long-press event
-//        val builder = AlertDialog.Builder(this)
-//        val plant_name = item.title
-//        builder.setMessage("Are you sure you want to Delete $plant_name?")
-//            .setCancelable(false)
-//            .setPositiveButton("Yes") { dialog, id ->
-//                val db = DatabaseHelper(this)
-//                db.removePlant(plant_name)
-//                db.close()
-//                this.recreate()
-//
-//            }
-//            .setNegativeButton("No") { dialog, id ->
-//                // Dismiss the dialog
-//                dialog.dismiss()
-//            }
-//        val alert = builder.create()
-//        alert.show()
-    }
+    override fun onItemLongClick(item: DetailsItem) {}
 
 }
