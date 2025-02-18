@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() ,ItemAdapter.OnItemClickListener, ItemA
             .setCancelable(false)
             .setPositiveButton("Show Details") { dialog, id ->
                 // show PlantDetailsActivity
+                val intent = Intent(applicationContext, PlantDetailsActivity::class.java)
+                intent.putExtra("plant_name", item.title)
+                startActivity(intent)
                 dialog.dismiss()
 
             }
