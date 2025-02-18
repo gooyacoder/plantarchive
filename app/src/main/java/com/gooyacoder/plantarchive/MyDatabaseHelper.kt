@@ -45,6 +45,15 @@ class MyDatabaseHelper(context: Context) :
         return list
     }
 
+    fun removeDetail(date: String?) {
+        val db = this.writableDatabase
+        db.execSQL(
+            "delete from PlantsGallery where" +
+                    " image_date = \"" + date + "\";"
+        );
+        db.close()
+    }
+
     companion object {
         private const val DATABASE_NAME = "plants_gallery_db.db"
         private const val DATABASE_VERSION = 1

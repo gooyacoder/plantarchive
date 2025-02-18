@@ -57,6 +57,24 @@ class PlantDetailsActivity : AppCompatActivity(), DetailsItemAdapter.OnItemClick
         big_image.visibility = View.VISIBLE
     }
 
-    override fun onItemLongClick(item: DetailsItem) {}
+    override fun onItemLongClick(item: DetailsItem) {
+        val builder = AlertDialog.Builder(this)
+        val date = item.startDate
+        builder.setMessage("Are you sure you want to Delete $date?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+                val db = MyDatabaseHelper(this)
+                db.removeDetail(date)
+                db.close()
+                this.recreate()
+
+            }
+            .setNegativeButton("No") { dialog, id ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
+    }
 
 }

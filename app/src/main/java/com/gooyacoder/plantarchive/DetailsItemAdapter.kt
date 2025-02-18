@@ -22,12 +22,12 @@ class DetailsItemAdapter(private val itemList: List<DetailsItem>,
 
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.detailsPlantName)
+
         val date: TextView = view.findViewById(R.id.DetailsDate)
         val image: ImageView = view.findViewById(R.id.DetailsPlantImage)
         
         fun bind(item: DetailsItem, clickListener: OnItemClickListener) {
-            textView.text = item.title
+
             val g_date = GerminationDate()
             val persian_date = g_date.dateToPersian(g_date.stringToDate(item.startDate))
             date.text = persian_date.longDateString
